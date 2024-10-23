@@ -48,4 +48,8 @@ public class PrestamoUqConstantes {
     public static final String BODY_OBJETO_ELIMINADO = "El Objeto se eliminó";
     public static final String TITULO_OBJETO_NO_ELIMINADO = "Objeto no eliminado";
     public static final String BODY_OBJETO_NO_ELIMINADO = "El Objeto no se eliminó";
+    public static final String TITULO_CLIENTE_ENCONTRADO = "Cliente Encontrado ";
+    public static final String BODY_CLIENTE_ENCONTRADO = "El Cliente ha sido encontrado";
+    public static final String TITULO_CLIENTE_NO_ENCONTRADO = "Cliente NO Encontrado ";
+    public static final String BODY_CLIENTE_NO_ENCONTRADO = "El Cliente NO ha sido encontrado";
 }

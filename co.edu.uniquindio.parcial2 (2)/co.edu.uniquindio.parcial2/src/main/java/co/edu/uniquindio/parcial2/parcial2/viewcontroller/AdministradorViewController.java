@@ -352,11 +352,10 @@ public class AdministradorViewController {
         Cliente clienteEncontrado = administradorController.obtenerCliente(cedula);
         if(clienteEncontrado != null){
             txtResultadoClienteCedula.setText(clienteEncontrado.toString());
-            mostrarMensaje(TITULO_OBJETO_ENCONTRADO,HEADER,BODY_OBJETO_ENCONTRADO, Alert.AlertType.INFORMATION);
+            mostrarMensaje(TITULO_CLIENTE_ENCONTRADO,HEADER,BODY_CLIENTE_ENCONTRADO, Alert.AlertType.INFORMATION);
         } else{
-            mostrarMensaje(TITULO_OBJETO_NO_ENCONTRADO,HEADER,BODY_OBJETO_NO_ENCONTRADO, Alert.AlertType.ERROR);
+            mostrarMensaje(TITULO_CLIENTE_NO_ENCONTRADO,HEADER,BODY_CLIENTE_NO_ENCONTRADO, Alert.AlertType.ERROR);
         }
-
     }
 }
 
