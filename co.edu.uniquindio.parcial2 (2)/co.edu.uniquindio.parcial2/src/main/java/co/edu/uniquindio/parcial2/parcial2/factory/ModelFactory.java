@@ -1,14 +1,12 @@
 package co.edu.uniquindio.parcial2.parcial2.factory;
 
 import co.edu.uniquindio.parcial2.parcial2.mapping.mappers.PrestamoMappingImpl;
-import co.edu.uniquindio.parcial2.parcial2.model.Cliente;
-import co.edu.uniquindio.parcial2.parcial2.model.Empleado;
-import co.edu.uniquindio.parcial2.parcial2.model.Objeto;
-import co.edu.uniquindio.parcial2.parcial2.model.PrestamoUq;
+import co.edu.uniquindio.parcial2.parcial2.model.*;
 import co.edu.uniquindio.parcial2.parcial2.services.IModelFactoryService;
 import co.edu.uniquindio.parcial2.parcial2.services.IPrestamoMapping;
 import co.edu.uniquindio.parcial2.parcial2.utils.DataUtil;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ModelFactory implements IModelFactoryService {
@@ -31,6 +29,16 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public List<Cliente> obtenerClientes() {
         return prestamoUq.getClientes();
+    }
+
+    @Override
+    public List<Prestamo> obtenerPrestamoEspecifico(LocalDateTime rango) {
+        return prestamoUq.obtenerPrestamoEspecifico(rango);
+    }
+
+    @Override
+    public List<Prestamo> obtenerPrestamoRango(LocalDateTime rangoInicial, LocalDateTime rangoFinal) {
+        return prestamoUq.obtenerPrestamoRango(rangoInicial, rangoFinal);
     }
 
     public List<Objeto> obtenerObjetos() {

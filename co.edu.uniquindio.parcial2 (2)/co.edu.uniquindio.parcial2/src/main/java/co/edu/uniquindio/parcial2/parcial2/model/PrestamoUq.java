@@ -2,6 +2,7 @@ package co.edu.uniquindio.parcial2.parcial2.model;
 
 import co.edu.uniquindio.parcial2.parcial2.services.Estado;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -272,5 +273,27 @@ public class PrestamoUq {
         }
 
         return objetosPrestamos;
+    }
+
+    public List<Prestamo> obtenerPrestamoEspecifico(LocalDateTime rango) {
+        List<Prestamo> prestamosEspecificos = new ArrayList<>();
+        for (Prestamo i : prestamos){
+            if (rango.equals(i.getFechaPrestamo())){
+                prestamosEspecificos.add(i);
+            }
+        }
+
+        return prestamosEspecificos;
+    }
+
+    public List<Prestamo> obtenerPrestamoRango(LocalDateTime rangoInicial, LocalDateTime rangoFinal) {
+        List<Prestamo> prestamosRango = new ArrayList<>();
+        for (Prestamo i : prestamos){
+            if (rangoInicial.isBefore(i.getFechaPrestamo()) && rangoFinal.isAfter(i.getFechaPrestamo())){
+                prestamosRango.add(i);
+            }
+        }
+
+        return prestamosRango;
     }
 }
