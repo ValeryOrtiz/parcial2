@@ -96,4 +96,12 @@ public class ModelFactory implements IModelFactoryService {
     public boolean eliminarObjeto(Objeto objeto) {
         return prestamoUq.eliminarObjeto(objeto.getIdObjeto());
     }
+
+    public List<Objeto> obtenerObjetosNoPrestamos() {
+        return prestamoUq.obtenerObjetosNoPrestamos();
+    }
+
+    public List<Objeto> obtenerObjetosPrestamos() {
+        return prestamoUq.obtenerObjetosPrestamos();
+    }
 }

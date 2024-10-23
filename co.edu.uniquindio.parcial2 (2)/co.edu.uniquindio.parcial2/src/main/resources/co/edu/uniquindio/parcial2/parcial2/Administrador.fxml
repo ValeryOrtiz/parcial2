@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.parcial2.parcial2.viewcontroller.AdministradorViewController">
    <children>
       <TabPane prefHeight="500.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
@@ -25,7 +24,7 @@
                       <children>
                           <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
                               <items>
-                                  <fx:include source="Cliente.fxml"/>
+                                  <fx:include source="Cliente.fxml" />
                               </items>
                           </SplitPane>
                       </children>
@@ -39,7 +38,7 @@
                       <children>
                           <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
                               <items>
-                                  <fx:include source="Empleado.fxml"/>
+                                  <fx:include source="Empleado.fxml" />
                               </items>
                           </SplitPane>
                       </children>
@@ -53,7 +52,7 @@
                         <children>
                             <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
                                 <items>
-                                    <fx:include source="Objeto.fxml"/>
+                                    <fx:include source="Objeto.fxml" />
                                 </items>
                             </SplitPane>
                         </children>
@@ -67,7 +66,7 @@
                         <children>
                             <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
                                 <items>
-                                    <fx:include source="Prestamo.fxml"/>
+                                    <fx:include source="Prestamo.fxml" />
                                 </items>
                             </SplitPane>
                         </children>
@@ -241,6 +240,47 @@
                               </AnchorPane>
                            </items>
                         </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Consulta 1 Parcial">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="296.0" layoutY="43.0" text="Objetos con y sin prestamo asociado:">
+                           <font>
+                              <Font name="Century Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tableObjetosPrestamos" layoutX="17.0" layoutY="193.0" prefHeight="223.0" prefWidth="953.0">
+                           <columns>
+                              <TableColumn fx:id="tcNombreTodo" prefWidth="108.0" text="Nombre" />
+                              <TableColumn fx:id="tcPrestamoTodo" prefWidth="540.6666717529297" text="prestamoAsociado" />
+                              <TableColumn fx:id="tcEstadoTodo" minWidth="0.0" prefWidth="176.0" text="estado" />
+                              <TableColumn fx:id="tcIdObjetoTodo" prefWidth="128.66665649414062" text="id objeto" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="btnObjetosSinPrestamo" layoutX="229.0" layoutY="120.0" mnemonicParsing="false" onAction="#onObjetosSinPrestamo" prefHeight="25.0" prefWidth="134.0" text="Objetos sin prestamo" />
+                        <Button fx:id="btnObjetosConPrestamo" layoutX="433.0" layoutY="120.0" mnemonicParsing="false" onAction="#onObjetosConPrestamo" text="Objetos con prestamo" />
+                        <Button fx:id="btnObjetos" layoutX="624.0" layoutY="120.0" mnemonicParsing="false" onAction="#onObjetos" prefHeight="25.0" prefWidth="133.0" text="todos los objetos" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Consulta 2 Parcial">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="324.0" layoutY="32.0" text="Buscar un cliente con su cédula">
+                           <font>
+                              <Font name="Century Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnCedulaClienteBuscar" layoutX="464.0" layoutY="151.0" mnemonicParsing="false" onAction="#onCedulaClienteBuscar" text="Buscar" />
+                        <TextArea fx:id="txtResultadoClienteCedula" layoutX="184.0" layoutY="223.0" prefHeight="200.0" prefWidth="609.0" />
+                        <TextField fx:id="txtCedulaClienteBuscar" layoutX="450.0" layoutY="90.0" />
+                        <Label layoutX="379.0" layoutY="94.0" text="Cédula:" />
                      </children>
                   </AnchorPane>
               </content>

@@ -41,4 +41,12 @@ public class AdministradorController {
     public List<Objeto> obtenerObjetosNoDisponibles() {
         return modelFactory.obtenerObjetosNoDisponibles();
     }
+
+    public List<Objeto> obtenerObjetosNoPrestamos() {
+        return modelFactory.obtenerObjetosNoPrestamos();
+    }
+
+    public List<Objeto> obtenerObjetosPrestamos() {
+        return modelFactory.obtenerObjetosPrestamos();
+    }
 }

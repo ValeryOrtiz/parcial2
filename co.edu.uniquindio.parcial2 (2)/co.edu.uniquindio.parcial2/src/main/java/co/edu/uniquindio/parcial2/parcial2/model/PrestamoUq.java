@@ -252,4 +252,25 @@ public class PrestamoUq {
 
         return false;
     }
+
+    public List<Objeto> obtenerObjetosNoPrestamos() {
+        List<Objeto> objetosPrestamos = new ArrayList<>();
+        for (Objeto i : objetos){
+            if (i.getPrestamoAsociado()== null){
+                objetosPrestamos.add(i);
+            }
+        }
+
+        return objetosPrestamos;
+    }
+    public List<Objeto> obtenerObjetosPrestamos() {
+        List<Objeto> objetosPrestamos = new ArrayList<>();
+        for (Objeto i : objetos){
+            if (i.getPrestamoAsociado()!= null){
+                objetosPrestamos.add(i);
+            }
+        }
+
+        return objetosPrestamos;
+    }
 }

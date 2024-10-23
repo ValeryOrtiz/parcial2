@@ -27,6 +27,9 @@ public class AdministradorViewController {
     PrestamoUq prestamoUq;
     ObservableList<Objeto> listaObjetosDisponibles = FXCollections.observableArrayList();
     ObservableList<Objeto> listaObjetosNoDisponibles = FXCollections.observableArrayList();
+    ObservableList<Objeto> listaObjetosPrestamos = FXCollections.observableArrayList();
+    ObservableList<Objeto> listaObjetosNoPrestamos = FXCollections.observableArrayList();
+    ObservableList<Objeto> listaObjetosCompletos = FXCollections.observableArrayList();
 
 
     @FXML
@@ -34,6 +37,15 @@ public class AdministradorViewController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Button btnObjetos;
+
+    @FXML
+    private Button btnObjetosConPrestamo;
+
+    @FXML
+    private Button btnObjetosSinPrestamo;
 
     @FXML
     private Button btnBuscarObjetoIdentificador;
@@ -61,6 +73,21 @@ public class AdministradorViewController {
 
     @FXML
     private TextArea txtResultadoObjetoEncontrado;
+
+    @FXML
+    private TableView<Objeto> tableObjetosPrestamos;
+
+    @FXML
+    private TableColumn<Objeto,Estado> tcEstadoTodo;
+
+    @FXML
+    private TableColumn<Objeto, String> tcIdObjetoTodo;
+
+    @FXML
+    private TableColumn<Objeto, String> tcNombreTodo;
+
+    @FXML
+    private TableColumn<Objeto, Prestamo> tcPrestamoTodo;
 
     @FXML
     private TableView<Cliente> tableCliente;
@@ -200,6 +227,32 @@ public class AdministradorViewController {
         obtenerObjetosNoDisponibles();
         tableObjetoNoDisponible.getItems().clear();
         tableObjetoNoDisponible.setItems(listaObjetosNoDisponibles);
+        initDataBindingObjetosPrestamos();
+        obtenerObjetosPrestamosTodos();
+        obtenerObjetosNoPrestamos();
+        obtenerObjetosPrestamos();
+        tableObjetosPrestamos.getItems().clear();
+    }
+
+    private void obtenerObjetosPrestamos() {
+        listaObjetosPrestamos.addAll(administradorController.obtenerObjetosPrestamos());
+
+    }
+
+    private void obtenerObjetosNoPrestamos() {
+        listaObjetosNoPrestamos.addAll(administradorController.obtenerObjetosNoPrestamos());
+    }
+
+    private void obtenerObjetosPrestamosTodos() {
+        listaObjetosCompletos.addAll(administradorController.obtenerObjetos());
+
+    }
+
+    private void initDataBindingObjetosPrestamos() {
+        tcNombreTodo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        tcPrestamoTodo.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrestamoAsociado()));
+        tcEstadoTodo.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEstado()));
+        tcIdObjetoTodo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdObjeto()));
     }
 
     private void obtenerObjetosNoDisponibles() {
@@ -246,12 +299,38 @@ public class AdministradorViewController {
         tcIdObjeto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdObjeto()));
     }
 
-    private void obtenerObjetos() {
-        listaObjetos.addAll(administradorController.obtenerObjetos());
-    }
 
     private void obtenerClientes() {
         listaClientes.addAll(administradorController.obtenerClientes());
+    }
+
+    @FXML
+    void onObjetosConPrestamo(ActionEvent event) {
+        objetosConPrestamo();
+
+    }
+
+    private void objetosConPrestamo() {
+        tableObjetosPrestamos.setItems(listaObjetosPrestamos);
+    }
+
+    @FXML
+    void onObjetosSinPrestamo(ActionEvent event) {
+        objetosSinPrestamo();
+    }
+
+    private void objetosSinPrestamo() {
+        tableObjetosPrestamos.setItems(listaObjetosNoPrestamos);
+    }
+
+    @FXML
+    void onObjetos(ActionEvent event) {
+        objetosCompletos();
+    }
+
+    private void objetosCompletos() {
+        tableObjetosPrestamos.setItems(listaObjetosCompletos);
+
     }
 }
 
