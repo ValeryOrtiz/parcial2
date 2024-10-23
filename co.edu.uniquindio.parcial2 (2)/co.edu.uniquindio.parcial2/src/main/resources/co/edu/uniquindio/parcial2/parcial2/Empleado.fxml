@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.parcial2.parcial2.viewcontroller.EmpleadoViewController">
+   <children>
+      <Label layoutX="89.0" layoutY="57.0" text="Nombre:" />
+      <TextField fx:id="txtNombre" layoutX="183.0" layoutY="53.0" />
+      <Label layoutX="480.0" layoutY="57.0" text="Apellido:" />
+      <TextField fx:id="txtApellido" layoutX="574.0" layoutY="53.0" />
+      <Label layoutX="89.0" layoutY="102.0" text="Edad:" />
+      <TextField fx:id="txtEdad" layoutX="183.0" layoutY="98.0" />
+      <Label layoutX="480.0" layoutY="102.0" text="Cedula:" />
+      <TextField fx:id="txtCedula" layoutX="574.0" layoutY="98.0" />
+      <Button fx:id="btnAgregarEmpleado" layoutX="256.0" layoutY="170.0" mnemonicParsing="false" onAction="#onAgregarEmpleado" style="-fx-background-radius: 20;" text="Agregar" />
+      <Button fx:id="btnActualizarEmpleado" layoutX="374.0" layoutY="170.0" mnemonicParsing="false" onAction="#oNActualizarEmpleado" style="-fx-background-radius: 20;" text="Actualizar" />
+      <Button fx:id="btnEliminarEmpleado" layoutX="506.0" layoutY="170.0" mnemonicParsing="false" onAction="#onEliminarEmpleado" style="-fx-background-radius: 20;" text="Eliminar" />
+      <TableView fx:id="tableEmpleado" layoutX="155.0" layoutY="226.0" prefHeight="159.0" prefWidth="506.0">
+        <columns>
+          <TableColumn fx:id="tcNombre" prefWidth="120.00001525878906" text="Nombre" />
+          <TableColumn fx:id="tcApellido" prefWidth="136.0" text="Apellido" />
+            <TableColumn fx:id="tcCedula" prefWidth="125.33328247070312" text="Cedula" />
+            <TableColumn fx:id="tcEdad" prefWidth="125.3333740234375" text="Edad" />
+        </columns>
+      </TableView>
+      <Separator layoutX="16.0" layoutY="148.0" prefHeight="3.0" prefWidth="768.0" />
+   </children>
+</AnchorPane>
