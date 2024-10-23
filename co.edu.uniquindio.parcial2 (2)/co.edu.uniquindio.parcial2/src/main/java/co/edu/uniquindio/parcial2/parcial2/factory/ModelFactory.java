@@ -104,4 +104,8 @@ public class ModelFactory implements IModelFactoryService {
     public List<Objeto> obtenerObjetosPrestamos() {
         return prestamoUq.obtenerObjetosPrestamos();
     }
+
+    public Cliente obtenerCliente(String cedula) {
+        return prestamoUq.obtenerCliente(cedula);
+    }
 }

@@ -100,7 +100,7 @@ public class PrestamoUq {
                 .build();
     }
 
-    private Cliente obtenerCliente(String cedula) {
+    public Cliente obtenerCliente(String cedula) {
         Cliente cliente = null;
         for (Cliente cliente1: getClientes()) {
             if(cliente1.getCedula().equalsIgnoreCase(cedula)){

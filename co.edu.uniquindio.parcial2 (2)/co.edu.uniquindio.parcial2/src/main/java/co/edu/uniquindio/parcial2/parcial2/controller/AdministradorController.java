@@ -49,4 +49,8 @@ public class AdministradorController {
     public List<Objeto> obtenerObjetosPrestamos() {
         return modelFactory.obtenerObjetosPrestamos();
     }
+
+    public Cliente obtenerCliente(String cedula) {
+        return modelFactory.obtenerCliente( cedula);
+    }
 }

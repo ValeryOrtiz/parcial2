@@ -39,6 +39,9 @@ public class AdministradorViewController {
     private URL location;
 
     @FXML
+    private Button btnCedulaClienteBuscar;
+
+    @FXML
     private Button btnObjetos;
 
     @FXML
@@ -70,6 +73,12 @@ public class AdministradorViewController {
 
     @FXML
     private TextField txtResultadoCantidadObjetoNoDisponible;
+
+    @FXML
+    private TextField txtCedulaClienteBuscar;
+
+    @FXML
+    private TextArea txtResultadoClienteCedula;
 
     @FXML
     private TextArea txtResultadoObjetoEncontrado;
@@ -330,6 +339,23 @@ public class AdministradorViewController {
 
     private void objetosCompletos() {
         tableObjetosPrestamos.setItems(listaObjetosCompletos);
+
+    }
+
+    @FXML
+    void onCedulaClienteBuscar(ActionEvent event) {
+        buscarClienteCedula();
+    }
+
+    private void buscarClienteCedula() {
+        String cedula = txtCedulaClienteBuscar.getText();
+        Cliente clienteEncontrado = administradorController.obtenerCliente(cedula);
+        if(clienteEncontrado != null){
+            txtResultadoClienteCedula.setText(clienteEncontrado.toString());
+            mostrarMensaje(TITULO_OBJETO_ENCONTRADO,HEADER,BODY_OBJETO_ENCONTRADO, Alert.AlertType.INFORMATION);
+        } else{
+            mostrarMensaje(TITULO_OBJETO_NO_ENCONTRADO,HEADER,BODY_OBJETO_NO_ENCONTRADO, Alert.AlertType.ERROR);
+        }
 
     }
 }
