@@ -2,6 +2,7 @@ package co.edu.uniquindio.parcial2.parcial2.controller;
 
 import co.edu.uniquindio.parcial2.parcial2.factory.ModelFactory;
 import co.edu.uniquindio.parcial2.parcial2.model.Cliente;
+import co.edu.uniquindio.parcial2.parcial2.model.Empleado;
 import co.edu.uniquindio.parcial2.parcial2.model.Objeto;
 
 import java.util.List;
@@ -52,5 +53,9 @@ public class AdministradorController {
 
     public Cliente obtenerCliente(String cedula) {
         return modelFactory.obtenerCliente( cedula);
+    }
+
+    public List<Empleado> obtenerEmpleadosRango(int rango) {
+        return modelFactory.obtenerEmpleadosRango( rango);
     }
 }

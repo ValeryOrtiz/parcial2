@@ -116,4 +116,8 @@ public class ModelFactory implements IModelFactoryService {
     public Cliente obtenerCliente(String cedula) {
         return prestamoUq.obtenerCliente(cedula);
     }
+
+    public List<Empleado> obtenerEmpleadosRango(int rango) {
+        return prestamoUq.obtenerEmpleadosRango(rango);
+    }
 }

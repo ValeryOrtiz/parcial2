@@ -68,6 +68,22 @@ public class DataUtil {
                 .clienteAsociado(cliente3)
                 .empleadoAsociado(empleado3)
                 .build();
+        Prestamo prestamo4 = Prestamo.builder()
+                .fechaPrestamo(LocalDateTime.of(2024, 1, 9, 12, 12, 12))
+                .descripcion("Estudiante con credencial")
+                .numeroPrestamo("123")
+                .fechaEntrega(LocalDateTime.of(2024, 1, 15, 12, 12, 12))
+                .clienteAsociado(cliente1)
+                .empleadoAsociado(empleado1)
+                .build();
+        Prestamo prestamo5 = Prestamo.builder()
+                .fechaPrestamo(LocalDateTime.of(2024, 9, 9, 12, 12, 12))
+                .descripcion("Clase en el exterior del edificio")
+                .numeroPrestamo("234")
+                .fechaEntrega(LocalDateTime.of(2024, 9, 15, 12, 12, 12))
+                .clienteAsociado(cliente2)
+                .empleadoAsociado(empleado2)
+                .build();
         Objeto objeto1 = Objeto.builder()
                 .nombre("libro")
                 .idObjeto("1AAA")
@@ -85,9 +101,16 @@ public class DataUtil {
                 .estado(Estado.DISPONIBLE)
                 .prestamoAsociado(prestamo3)
                 .build();
+        empleado1.getPrestamosAsociados().add(prestamo1);
+        empleado1.getPrestamosAsociados().add(prestamo4);
+        empleado1.getPrestamosAsociados().add(prestamo2);
+        empleado2.getPrestamosAsociados().add(prestamo3);
+        empleado3.getPrestamosAsociados().add(prestamo5);
         objeto1.getPrestamos().add(prestamo1);
         objeto1.getPrestamos().add(prestamo2);
         objeto3.getPrestamos().add(prestamo3);
+        objeto2.getPrestamos().add(prestamo4);
+        objeto2.getPrestamos().add(prestamo5);
         cliente1.getPrestamosAsociados().add(prestamo1);
         cliente1.getPrestamosAsociados().add(prestamo2);
         cliente2.getPrestamosAsociados().add(prestamo3);
@@ -103,6 +126,8 @@ public class DataUtil {
         prestamoUq.getPrestamos().add(prestamo1);
         prestamoUq.getPrestamos().add(prestamo2);
         prestamoUq.getPrestamos().add(prestamo3);
+        prestamoUq.getPrestamos().add(prestamo4);
+        prestamoUq.getPrestamos().add(prestamo5);
         return prestamoUq;
     }
 }

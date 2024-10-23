@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.parcial2.parcial2.controller.AdministradorController;
-import co.edu.uniquindio.parcial2.parcial2.model.Cliente;
-import co.edu.uniquindio.parcial2.parcial2.model.Objeto;
-import co.edu.uniquindio.parcial2.parcial2.model.Prestamo;
-import co.edu.uniquindio.parcial2.parcial2.model.PrestamoUq;
+import co.edu.uniquindio.parcial2.parcial2.model.*;
 import co.edu.uniquindio.parcial2.parcial2.services.Estado;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,6 +21,7 @@ public class AdministradorViewController {
     AdministradorController administradorController;
     ObservableList<Objeto> listaObjetos = FXCollections.observableArrayList();
     ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
+    ObservableList<Empleado> listaEmpleados = FXCollections.observableArrayList();
     PrestamoUq prestamoUq;
     ObservableList<Objeto> listaObjetosDisponibles = FXCollections.observableArrayList();
     ObservableList<Objeto> listaObjetosNoDisponibles = FXCollections.observableArrayList();
@@ -82,6 +80,30 @@ public class AdministradorViewController {
 
     @FXML
     private TextArea txtResultadoObjetoEncontrado;
+
+    @FXML
+    private Button btnObtenerListaRangoEmpleado;
+
+    @FXML
+    private TableView<Empleado> tableEmpleado;
+
+    @FXML
+    private TableColumn<Empleado, String> tcApellidoEmpleado;
+
+    @FXML
+    private TableColumn<Empleado, String> tcCedulaEmpleado;
+
+    @FXML
+    private TableColumn<Empleado, Integer> tcEdadEmpleado;
+
+    @FXML
+    private TableColumn<Empleado, String> tcNombreEmpleado;
+
+    @FXML
+    private TableColumn<Empleado, Integer> tcCantidadPrestamosEmpleado;
+
+    @FXML
+    private TextField txtRangoEmpleado;
 
     @FXML
     private TableView<Objeto> tableObjetosPrestamos;
@@ -213,6 +235,83 @@ public class AdministradorViewController {
     }
 
     @FXML
+    void onObjetosConPrestamo(ActionEvent event) {
+        objetosConPrestamo();
+    }
+
+    private void objetosConPrestamo() {
+        if(listaObjetosPrestamos.size()>=0) {
+            tableObjetosPrestamos.setItems(listaObjetosPrestamos);
+            mostrarMensaje(TITULO_LISTA_ACTUALIZADA,HEADER,BODY_LISTA_ACTUALIZADA, Alert.AlertType.INFORMATION);
+        } else{
+            mostrarMensaje(TITULO_RANGO_INCORRECTO,HEADER,BODY_RANGO_INCORRECTO, Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    void onObjetosSinPrestamo(ActionEvent event) {
+        objetosSinPrestamo();
+    }
+
+    private void objetosSinPrestamo() {
+        if(listaObjetosNoPrestamos.size()>=0) {
+            tableObjetosPrestamos.setItems(listaObjetosNoPrestamos);
+            mostrarMensaje(TITULO_LISTA_ACTUALIZADA,HEADER,BODY_LISTA_ACTUALIZADA, Alert.AlertType.INFORMATION);
+        } else{
+            mostrarMensaje(TITULO_RANGO_INCORRECTO,HEADER,BODY_RANGO_INCORRECTO, Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    void onObjetos(ActionEvent event) {
+        objetosCompletos();
+    }
+
+    private void objetosCompletos() {
+        if(listaObjetosCompletos.size()>=0) {
+            tableObjetosPrestamos.setItems(listaObjetosCompletos);
+            mostrarMensaje(TITULO_LISTA_ACTUALIZADA,HEADER,BODY_LISTA_ACTUALIZADA, Alert.AlertType.INFORMATION);
+        } else{
+            mostrarMensaje(TITULO_RANGO_INCORRECTO,HEADER,BODY_RANGO_INCORRECTO, Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    void onCedulaClienteBuscar(ActionEvent event) {
+        buscarClienteCedula();
+    }
+
+    private void buscarClienteCedula() {
+        String cedula = txtCedulaClienteBuscar.getText();
+        Cliente clienteEncontrado = administradorController.obtenerCliente(cedula);
+        if(clienteEncontrado != null){
+            txtResultadoClienteCedula.setText(clienteEncontrado.toString());
+            mostrarMensaje(TITULO_CLIENTE_ENCONTRADO,HEADER,BODY_CLIENTE_ENCONTRADO, Alert.AlertType.INFORMATION);
+        } else{
+            mostrarMensaje(TITULO_CLIENTE_NO_ENCONTRADO,HEADER,BODY_CLIENTE_NO_ENCONTRADO, Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void onObtenerListaRangoEmpleado(ActionEvent event) {
+
+        obtenerListaRangoEmpleado();
+    }
+
+    private void obtenerListaRangoEmpleado() {
+        int rango = Integer.parseInt(txtRangoEmpleado.getText());
+        if(rango >= 0){
+            List<Empleado> empleadosRango = administradorController.obtenerEmpleadosRango(rango);
+            listaEmpleados.clear();
+            listaEmpleados.addAll(empleadosRango);
+            txtRangoEmpleado.clear();
+            mostrarMensaje(TITULO_LISTA_ACTUALIZADA,HEADER,BODY_LISTA_ACTUALIZADA, Alert.AlertType.INFORMATION);
+        } else{
+            mostrarMensaje(TITULO_RANGO_INCORRECTO,HEADER,BODY_RANGO_INCORRECTO, Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
     void initialize() {
         administradorController = new AdministradorController();
         prestamoUq = new PrestamoUq();
@@ -241,6 +340,18 @@ public class AdministradorViewController {
         obtenerObjetosNoPrestamos();
         obtenerObjetosPrestamos();
         tableObjetosPrestamos.getItems().clear();
+        initDataBindingRangoEmpleado();
+        //obtenerClientes();
+        tableEmpleado.getItems().clear();
+        tableEmpleado.setItems(listaEmpleados);
+    }
+
+    private void initDataBindingRangoEmpleado() {
+        tcNombreEmpleado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        tcApellidoEmpleado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getApellido()));
+        tcCedulaEmpleado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCedula()));
+        tcEdadEmpleado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEdad()));
+        tcCantidadPrestamosEmpleado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrestamosAsociados().size()));
     }
 
     private void obtenerObjetosPrestamos() {
@@ -313,49 +424,5 @@ public class AdministradorViewController {
         listaClientes.addAll(administradorController.obtenerClientes());
     }
 
-    @FXML
-    void onObjetosConPrestamo(ActionEvent event) {
-        objetosConPrestamo();
-
-    }
-
-    private void objetosConPrestamo() {
-        tableObjetosPrestamos.setItems(listaObjetosPrestamos);
-    }
-
-    @FXML
-    void onObjetosSinPrestamo(ActionEvent event) {
-        objetosSinPrestamo();
-    }
-
-    private void objetosSinPrestamo() {
-        tableObjetosPrestamos.setItems(listaObjetosNoPrestamos);
-    }
-
-    @FXML
-    void onObjetos(ActionEvent event) {
-        objetosCompletos();
-    }
-
-    private void objetosCompletos() {
-        tableObjetosPrestamos.setItems(listaObjetosCompletos);
-
-    }
-
-    @FXML
-    void onCedulaClienteBuscar(ActionEvent event) {
-        buscarClienteCedula();
-    }
-
-    private void buscarClienteCedula() {
-        String cedula = txtCedulaClienteBuscar.getText();
-        Cliente clienteEncontrado = administradorController.obtenerCliente(cedula);
-        if(clienteEncontrado != null){
-            txtResultadoClienteCedula.setText(clienteEncontrado.toString());
-            mostrarMensaje(TITULO_CLIENTE_ENCONTRADO,HEADER,BODY_CLIENTE_ENCONTRADO, Alert.AlertType.INFORMATION);
-        } else{
-            mostrarMensaje(TITULO_CLIENTE_NO_ENCONTRADO,HEADER,BODY_CLIENTE_NO_ENCONTRADO, Alert.AlertType.ERROR);
-        }
-    }
 }
 

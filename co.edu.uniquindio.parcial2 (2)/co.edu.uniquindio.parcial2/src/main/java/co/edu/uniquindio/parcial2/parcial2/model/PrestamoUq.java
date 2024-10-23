@@ -296,4 +296,15 @@ public class PrestamoUq {
 
         return prestamosRango;
     }
+
+    public List<Empleado> obtenerEmpleadosRango(int rango) {
+        List<Empleado> empleadosRango = new ArrayList<>();
+        for(Empleado i : empleados){
+            if (i.getPrestamosAsociados().size()==(rango)){
+                empleadosRango.add(i);
+            }
+        }
+
+        return empleadosRango;
+    }
 }
